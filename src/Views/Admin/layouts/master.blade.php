@@ -47,7 +47,8 @@
                                     <img src="/../assets/admin/assets/images/logo-sm.png" alt="" height="22">
                                 </span>
                                 <span class="logo-lg">
-                                    <img src="/../assets/admin/assets/images/logo-dark.png" alt="" height="17">
+                                    <img src="/../assets/admin/assets/images/logo-dark.png" alt=""
+                                        height="17">
                                 </span>
                             </a>
 
@@ -860,15 +861,21 @@
                         </div>
 
                         <div class="dropdown ms-sm-3 header-item topbar-user">
+                            {{-- @dd($_SESSION['user_data_admin']) --}}
+                            @if (!empty($_SESSION['user_data_admin']))
+                                @php
+                                    extract($_SESSION['user_data_admin']);
+                                @endphp
+                            @endif
                             <button type="button" class="btn" id="page-header-user-dropdown"
                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="d-flex align-items-center">
-                                    <img class="rounded-circle header-profile-user"
-                                        src="/../assets/admin/assets/images/users/avatar-1.jpg" alt="Header Avatar">
+                                    <img class="rounded-circle header-profile-user" src="{{ $avatar }}"
+                                        alt="Header Avatar">
                                     <span class="text-start ms-xl-2">
-                                        <span class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">Anna
-                                            Adame</span>
-                                        <span class="d-none d-xl-block ms-1 fs-12 user-name-sub-text">Founder</span>
+                                        <span
+                                            class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">{{ $name }}</span>
+                                        <span class="d-none d-xl-block ms-1 fs-12 user-name-sub-text">admin</span>
                                     </span>
                                 </span>
                             </button>
@@ -898,7 +905,7 @@
                                 <a class="dropdown-item" href="auth-lockscreen-basic.html"><i
                                         class="mdi mdi-lock text-muted fs-16 align-middle me-1"></i> <span
                                         class="align-middle">Lock screen</span></a>
-                                <a class="dropdown-item" href="auth-logout-basic.html"><i
+                                <a class="dropdown-item" href="/auth/logout"><i
                                         class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i> <span
                                         class="align-middle" data-key="t-logout">Logout</span></a>
                             </div>
@@ -952,7 +959,7 @@
                 </div>
                 <!-- container-fluid -->
             </div>
-            
+
             <!-- End Page-content -->
 
             {{-- footer --}}
@@ -1004,8 +1011,8 @@
                     <div class="row gy-3">
                         <div class="col-4">
                             <div class="form-check card-radio">
-                                <input id="customizer-layout01" name="data-layout" type="radio"
-                                    value="vertical" class="form-check-input">
+                                <input id="customizer-layout01" name="data-layout" type="radio" value="vertical"
+                                    class="form-check-input">
                                 <label class="form-check-label p-0 avatar-md w-100" for="customizer-layout01">
                                     <span class="d-flex gap-1 h-100">
                                         <span class="flex-shrink-0">
@@ -1029,8 +1036,8 @@
                         </div>
                         <div class="col-4">
                             <div class="form-check card-radio">
-                                <input id="customizer-layout02" name="data-layout" type="radio"
-                                    value="horizontal" class="form-check-input">
+                                <input id="customizer-layout02" name="data-layout" type="radio" value="horizontal"
+                                    class="form-check-input">
                                 <label class="form-check-label p-0 avatar-md w-100" for="customizer-layout02">
                                     <span class="d-flex h-100 flex-column gap-1">
                                         <span class="bg-light d-flex p-1 gap-1 align-items-center">
@@ -1047,8 +1054,8 @@
                         </div>
                         <div class="col-4">
                             <div class="form-check card-radio">
-                                <input id="customizer-layout03" name="data-layout" type="radio"
-                                    value="twocolumn" class="form-check-input">
+                                <input id="customizer-layout03" name="data-layout" type="radio" value="twocolumn"
+                                    class="form-check-input">
                                 <label class="form-check-label p-0 avatar-md w-100" for="customizer-layout03">
                                     <span class="d-flex gap-1 h-100">
                                         <span class="flex-shrink-0">
@@ -1082,8 +1089,8 @@
 
                         <div class="col-4">
                             <div class="form-check card-radio">
-                                <input id="customizer-layout04" name="data-layout" type="radio"
-                                    value="semibox" class="form-check-input">
+                                <input id="customizer-layout04" name="data-layout" type="radio" value="semibox"
+                                    class="form-check-input">
                                 <label class="form-check-label p-0 avatar-md w-100" for="customizer-layout04">
                                     <span class="d-flex gap-1 h-100">
                                         <span class="flex-shrink-0 p-1">
@@ -1180,8 +1187,7 @@
                                 <div class="form-check card-radio">
                                     <input class="form-check-input" type="radio" name="data-sidebar-visibility"
                                         id="sidebar-visibility-show" value="show">
-                                    <label class="form-check-label p-0 avatar-md w-100"
-                                        for="sidebar-visibility-show">
+                                    <label class="form-check-label p-0 avatar-md w-100" for="sidebar-visibility-show">
                                         <span class="d-flex gap-1 h-100">
                                             <span class="flex-shrink-0 p-1">
                                                 <span class="bg-light d-flex h-100 flex-column gap-1 p-1">
@@ -1259,8 +1265,7 @@
                                 <div class="form-check card-radio">
                                     <input class="form-check-input" type="radio" name="data-layout-width"
                                         id="layout-width-boxed" value="boxed">
-                                    <label class="form-check-label p-0 avatar-md w-100 px-2"
-                                        for="layout-width-boxed">
+                                    <label class="form-check-label p-0 avatar-md w-100 px-2" for="layout-width-boxed">
                                         <span class="d-flex gap-1 h-100 border-start border-end">
                                             <span class="flex-shrink-0">
                                                 <span class="bg-light d-flex h-100 flex-column gap-1 p-1">

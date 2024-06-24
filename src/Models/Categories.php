@@ -26,6 +26,24 @@ class Categories extends Model
         }
     }
 
+    public function getAllCategory($id)
+    {
+        try {
+            $sql = "SELECT * FROM $this->table WHERE id = :id";
+
+            $stmt = $this->conn->prepare($sql);
+
+            $stmt->bindParam(':id',$id);
+
+            $stmt->execute();
+
+            return $stmt->fetchAll();
+
+        } catch (\Exception $e) {
+            echo 'ERROR: ' . $e->getMessage();
+            die;
+        }
+    }
 
     public function getByID($id)
     {

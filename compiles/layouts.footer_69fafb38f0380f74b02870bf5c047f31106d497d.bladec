@@ -81,15 +81,6 @@
  <li><a href="#"><i class="fab fa-cc-discover"></i></a></li>
  </ul>
  </div>
- <div class="img-lk">
-
- <a href="#"><img data-src="/tp/T0320/img/a1.png" src="/img/lazyLoading.gif" alt=""
- class="lazyload"></a>
- <a href="#"><img data-src="/tp/T0320/img/a2.png" alt="" src="/img/lazyLoading.gif" alt=""
- class="lazyload"></a>
- <a href="#"><img data-src="/tp/T0320/img/a3.png" alt="" src="/img/lazyLoading.gif" alt=""
- class="lazyload"></a>
- </div>
  </div>
  <div class="footer-map">
  <iframe

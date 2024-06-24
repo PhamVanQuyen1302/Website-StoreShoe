@@ -17,11 +17,12 @@ class ProductDetailController extends Controller {
     public function index($id) {
 
         $product = $this->products->getProductDetail($id);
-
-        debug($product);
+        $sizes = $this->products->getSizeByIdProduct($id);
+        // debug($sizes);
 
         return $this->renderViewsClient('ProductDetail', [
             'product' => $product,
+            'sizes' =>  $sizes
         ]);
     }
 }

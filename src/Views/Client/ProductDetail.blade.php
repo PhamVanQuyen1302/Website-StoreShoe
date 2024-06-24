@@ -66,28 +66,7 @@
                                     </div>
 
                                 </div>
-                                {{-- <div class="slider-nav slick-bottom">
-                                <div class="item">
-                                    <img alt="Giày Nike Air Force 1 Shadow SE Women’s “Solar Red” DB3902-100"
-                                        class="cloudzoom-gallery"
-                                        src="https://pos.nvncdn.com/5a10ca-97757/ps/20220316_xBAIOtGAFgN93OMEg4QSs8Ki.jpeg">
-                                </div>
-                                <div class="item">
-                                    <img alt="Giày Nike Air Force 1 Shadow SE Women’s “Solar Red” DB3902-100"
-                                        class="cloudzoom-gallery"
-                                        src="https://pos.nvncdn.com/5a10ca-97757/ps/20220316_nwRnnQQmgY74hjSAQwfYR9gW.jpeg">
-                                </div>
-                                <div class="item">
-                                    <img alt="Giày Nike Air Force 1 Shadow SE Women’s “Solar Red” DB3902-100"
-                                        class="cloudzoom-gallery"
-                                        src="https://pos.nvncdn.com/5a10ca-97757/ps/20220316_j70g3XJc6W0jPOGL2VMVKIMz.jpeg">
-                                </div>
-                                <div class="item">
-                                    <img alt="Giày Nike Air Force 1 Shadow SE Women’s “Solar Red” DB3902-100"
-                                        class="cloudzoom-gallery"
-                                        src="https://pos.nvncdn.com/5a10ca-97757/ps/20220316_W7LQIQSHsClLNPEKOiE5zV1w.jpeg">
-                                </div>
-                            </div> --}}
+
                                 <div class="wishlist prd37834087">
                                     <div data-id="37834087" class="wishlistItems">
                                         <span class="wish-none"><i class="far fa-heart"></i>Sản phẩm yêu thích</span>
@@ -117,12 +96,9 @@
                             <div class="product-selection">
                                 <div class="size req clearfix" data-column="i2">
                                     <label>Size</label>
-                                    @php
-                                        $sizes = explode(',', $product['sizes']);
-                                    @endphp
                                     <div class="clearfix">
                                         @foreach ($sizes as $item)
-                                            <a rel="nofollow" data-value="1528758" class="">{{ $item }}</a>
+                                            <a rel="nofollow" data-value="{{ $item['id'] }}" class="">{{ $item['size'] }}</a>
                                         @endforeach
                                         {{-- <a rel="nofollow" data-value="1528757" href="javascript:void(0)" class="">40</a>
                                     <a rel="nofollow" data-value="1528756" href="javascript:void(0)" class="">39</a> --}}
@@ -380,41 +356,51 @@
                                 <h2 class="title-hd"><a href="#">Có thể bạn quan tâm</a></h2>
                             </div>
                         </div>
+                        @php
+                            $getProductFromCategory = (new \App\StoreShoe\Models\Products())->getProductFromCategory(
+                                $product['p_category_id'],
+                            );
+                        @endphp
+                        {{-- @dd($getProductFromCategory) --}}
                         <div class="slide-wrapper slide-product relate-product">
                             <div class="product-grid">
-                                <div class="box-product box_tab_index prdWrapper" data-pid="37834087">
-                                    <div class="item col-lg-3 col-md-4 col-xs-6 col-sm-6">
-                                        <div class="inner-item sold-out">
-                                            <div class="p-image">
-                                                <a class="a-image"
-                                                    href="/giay-nike-air-force-1-shadow-se-womens-solar-red-db3902100-p37834087.html">
-                                                    <img data-sizes="auto" src="/img/lazyLoading.gif"
-                                                        data-src="https://pos.nvncdn.com/5a10ca-97757/ps/20220316_BA58ynpFAIIWCRxZK5EXOPds.jpeg"
-                                                        class="attachment-medium size-medium wp-post-image lazyload"
-                                                        alt="Giày Nike Air Force 1 Shadow SE Women’s “Solar Red” DB3902-100" />
-                                                </a>
-                                                <div class="btn-quickview tp_button" data-psId="37834087"><i
-                                                        class="fal fa-eye"></i><span> Xem nhanh</span>
+                                @foreach ($getProductFromCategory as $item)
+                                    <div class="box-product box_tab_index prdWrapper" data-pid="37834087">
+                                        <div class="item col-lg-3 col-md-4 col-xs-6 col-sm-6">
+                                            <div class="inner-item sold-out">
+                                                <div class="p-image">
+                                                    <a class="a-image"
+                                                        href="/product/{{ $item['p_id'] }}">
+                                                        <img data-sizes="auto" src="{{ $item['p_image'] }}"
+                                                            data-src="{{ $item['p_image'] }}"
+                                                            class="attachment-medium size-medium wp-post-image lazyload"
+                                                            alt="Giày Nike Air Force 1 Shadow SE Women’s “Solar Red” DB3902-100" />
+                                                    </a>
+                                                    <div class="btn-quickview tp_button" data-psId="37834087">
+                                                        <i class="fal fa-eye"></i>
+                                                        <a href="/product/{{ $item['p_id'] }}">
+                                                            <span> Xem nhanh</span>
+                                                        </a>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="box-text">
-                                                <p class="title"><a class="tp_product_name"
-                                                        href="/giay-nike-air-force-1-shadow-se-womens-solar-red-db3902100-p37834087.html"
-                                                        title="Giày Nike Air Force 1 Shadow SE Women’s “Solar Red” DB3902-100">Giày
-                                                        Nike Air Force 1 Shadow SE Women’s “Solar Red” DB3902-100</a>
-                                                </p>
+                                                <div class="box-text">
+                                                    <p class="title"><a class="tp_product_name"
+                                                            href="/product/{{ $item['p_id'] }}"
+                                                            title="Giày Nike Air Force 1 Shadow SE Women’s “Solar Red” DB3902-100">{{ $item['p_name'] }}</a>
+                                                    </p>
 
-                                                <p class="price">
-                                                    <strong class="f-left">
-                                                        <span class="tp_product_price">2,990,000 ₫ </span> </strong>
-                                                </p>
-                                                <p class="discount-percent"></p>
-                                            </div>
+                                                    <p class="price">
+                                                        <strong class="f-left">
+                                                            <span class="tp_product_price">{{ number_format($item['p_price']) }}₫</span> </strong>
+                                                    </p>
+                                                    <p class="discount-percent"></p>
+                                                </div>
 
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="box-product box_tab_index prdWrapper" data-pid="37834032">
+                                @endforeach
+                                {{-- <div class="box-product box_tab_index prdWrapper" data-pid="37834032">
                                     <div class="item col-lg-3 col-md-4 col-xs-6 col-sm-6">
                                         <div class="inner-item sold-out">
                                             <div class="p-image">
@@ -646,7 +632,7 @@
 
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                     </div>
@@ -658,7 +644,7 @@
         <div style="display: none;">
             <div id="dMsg"></div>
         </div>
-    
+
         <div id="guide-size" class="modal fade" role="dialog">
             <div class="modal-content clearfix"></div>
         </div>

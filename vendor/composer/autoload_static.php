@@ -11,6 +11,14 @@ class ComposerStaticInit79c7d44b05434d89d339b841e37631ee
         array (
             'eftec\\bladeone\\' => 15,
         ),
+        'P' => 
+        array (
+            'PHPMailer\\PHPMailer\\' => 20,
+        ),
+        'F' => 
+        array (
+            'Firebase\\JWT\\' => 13,
+        ),
         'A' => 
         array (
             'App\\StoreShoe\\' => 14,
@@ -21,6 +29,14 @@ class ComposerStaticInit79c7d44b05434d89d339b841e37631ee
         'eftec\\bladeone\\' => 
         array (
             0 => __DIR__ . '/..' . '/eftec/bladeone/lib',
+        ),
+        'PHPMailer\\PHPMailer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
+        ),
+        'Firebase\\JWT\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/firebase/php-jwt/src',
         ),
         'App\\StoreShoe\\' => 
         array (

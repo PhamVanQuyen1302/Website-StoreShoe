@@ -53,6 +53,10 @@
                     <a href="/admin/product-properties" class="nav-link" data-key="t-analytics">
                         Danh sách thuộc tính sản phẩm </a>
                 </li>
+                <li class="nav-item">
+                    <a href="/" class="nav-link" data-key="t-analytics">
+                        Quay về trang User </a>
+                </li>
             </ul>
         </div>
         <!-- Sidebar -->

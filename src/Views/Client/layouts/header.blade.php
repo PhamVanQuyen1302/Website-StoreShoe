@@ -11,14 +11,16 @@
                     $categories =  (new \App\StoreShoe\Models\Categories())->getAll()
                 @endphp
                 <ul class="menu__list menu__list--top tp_menu">
+                    <li class="menu__item mega tp_menu_item"><a href="/"
+                        title="Trang chủ" class="menu__link">Trang chủ</a></li>
                    @foreach ($categories as $item)
                        
                    <li class="menu__item mega tp_menu_item">
-                       <a href="/giay-adidas-pc569763.html" title="Giày Adidas" class="menu__link">{{ $item['name'] }}</a>
+                       <a href="/filter_data/{{ $item['id'] }}" title="Giày Adidas" class="menu__link">{{ $item['name'] }}</a>
                    </li>
                    @endforeach
                     
-                    <li class="menu__item mega tp_menu_item"><a href="/tin-tuc-chung-nc103834.html"
+                    <li class="menu__item mega tp_menu_item"><a href="/tin-tuc"
                             title="Tin tức chung" class="menu__link">Tin tức chung</a></li>
                     <li class="menu__item mega tp_menu_item"><a href="/lien-he" title="Liên hệ"
                             class="menu__link">Liên hệ</a></li>

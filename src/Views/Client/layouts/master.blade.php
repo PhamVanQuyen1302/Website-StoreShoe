@@ -44,6 +44,8 @@
     <link rel="stylesheet" href="https://web.nvnstatic.net/tp/T0320/css/style.css?v=60" type="text/css">
     <link rel="stylesheet" href="https://web.nvnstatic.net/tp/T0320/css/reponsive.css?v=60" type="text/css">
     <link rel="stylesheet" href="https://web.nvnstatic.net/tp/T0320/css/stores/97757.css?v=60" type="text/css">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script defer type="text/javascript" src="https://web.nvnstatic.net/js/jquery/jquery.min.js?v=26"></script>
     <script defer type="text/javascript" src="https://web.nvnstatic.net/js/jquery/jquery-ui-1.10.3.custom.min.js?v=26">
     </script>
@@ -237,8 +239,8 @@
                                         title="Tin tức chung" class="menu__link">Tin tức chung</a></li>
                                 <li class="menu__item mega tp_menu_item"><a href="/lien-he" title="Liên hệ"
                                         class="menu__link">Liên hệ</a></li>
-                                <li><a href="/user/signin">Đăng nhập</a></li>
-                                <li><a href="/user/signup">Đăng ký</a></li>
+                                <li><a href="/auth/login">Đăng nhập</a></li>
+                                <li><a href="/auth/register">Đăng ký</a></li>
                                 <li class="language_mobile"></li>
                             </ul>
                         </nav>
@@ -252,9 +254,16 @@
                     <div class="row">
                         <div class="topbar-left col-md-4">
                             <ul>
-                                <li class="header-hotline"><a href="tel:" class="load-scale">Hotline:
-                                        <b></b></a><b><a href="tel:" style="color: #cc0101;"></a></b>
+                                <li class="header-hotline">
+                                    <a href="tel:" class="load-scale">
+                                        Hotline:
+                                        <b></b>
+                                    </a>
+                                    <b>
+                                        <a href="tel:0358247638" style="color: #cc0101;">0358247638</a>
+                                    </b>
                                 </li>
+                              
                             </ul>
                         </div>
                         <div class="topbar-right col-md-8">
@@ -295,15 +304,44 @@
                                                 <div class="searchFolding searchFolding-pc"></div>
                                             </div>
                                         </div>
-                                        <div id="site-account-handle" class="icon-account" aria-label="Open account"
-                                            title="Tài khoản">
-                                            <a href="/user/signin" title="Đăng nhập"><span class="account-menu"
-                                                    aria-hidden="true"><img
-                                                        src="https://web.nvnstatic.net/tp/T0320/img/icon-header-1.png?v=3"
-                                                        alt="cart">Đăng nhập</span></a><a href="/user/signup"
-                                                title="Đăng ký"><span class="account-menu" aria-hidden="true">Đăng
-                                                    ký</span></a>
+                                        @if (!empty($_SESSION['user_data_client']) || !empty($_SESSION['user_data_admin']))
+                                            @php
+                                            if (isset($_SESSION['user_data_client'])) {
+                                                extract($_SESSION['user_data_client']);
+                                            } else {
+                                                extract($_SESSION['user_data_admin']);
+                                            }
+                                            @endphp
+                                            <div id="site-account-handle" class="icon-account"
+                                            aria-label="Open account" title="Tài khoản">
+                                            <a href="/users-infor/{{ $id }}" >
+                                                <span class="account-menu" aria-hidden="true">
+                                                    <img src="{{ $avatar }}">
+                                                    {{ $name }}
+                                                </span>
+                                            </a>/
+                                            <a href="/auth/logout">
+                                                <span class="account-menu"  aria-hidden="true">
+                                                    Đăng xuất
+                                                </span>
+                                            </a>
                                         </div>
+                                        @else
+                                        <div id="site-account-handle" class="icon-account"
+                                                aria-label="Open account" title="Tài khoản">
+                                                <a href="/auth/login" title="Đăng nhập">
+                                                    <span class="account-menu" aria-hidden="true">
+                                                        <img src="https://web.nvnstatic.net/tp/T0320/img/icon-header-1.png?v=3" alt="cart">
+                                                        Đăng nhập
+                                                    </span>
+                                                </a>
+                                                <a href="/auth/register" title="Đăng ký">
+                                                    <span class="account-menu" aria-hidden="true">
+                                                        Đăng ký
+                                                    </span>
+                                                </a>
+                                            </div>
+                                        @endif
                                         <div id="site-cart-handle" class="icon-cart" aria-label="Open cart"
                                             title="Giỏ hàng">
                                             <a href="/cart">
@@ -335,7 +373,7 @@
     </div>
     {{-- MAIN --}}
     @yield('content')
-   {{-- FOOTER --}}
+    {{-- FOOTER --}}
     @include('layouts.footer')
     <div style="display: none;">
         <div id="dMsg"></div>
@@ -455,5 +493,6 @@
     </style><input type="hidden" id="bussinessId" value="97757"><input type="hidden" value=""
         id="uctk" name="uctk" /><input type="hidden" id="clienIp" value="113.190.83.234">
 </body>
+<script src="../src/ajax/FilterProduct.js"></script>
 
 </html>

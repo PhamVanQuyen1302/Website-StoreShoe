@@ -3,15 +3,18 @@
 namespace App\StoreShoe\Controllers\Client;
 
 use App\StoreShoe\Commons\Controller;
+use App\StoreShoe\Models\Categories;
 use App\StoreShoe\Models\Products;
 
 class HomeController extends Controller{
 
     private Products $products;
+    
 
     public function __construct()
     {
         $this->products = new Products();
+        
     }
     public function index() {
         
@@ -22,11 +25,15 @@ class HomeController extends Controller{
         ]);
     }
 
-    // public function show($id) {
-    //     $product = $this->products->getByID($id);
+    public function general() {
 
-    //     return $this->renderViewsClient('ProductDetail', [
-    //         'product' => $product,
-    //     ]);
-    // }
+        return $this->renderViewsClient('general');
+    }
+
+    public function contact() {
+
+        return $this->renderViewsClient('contact');
+    }
+
+    
 }
