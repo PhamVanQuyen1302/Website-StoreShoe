@@ -211,6 +211,35 @@ class Products extends Model
         }
     }
 
+    public function getProductToAddToCartByID($id)
+    {
+        try {
+            $sql = "SELECT  p.id            p_id            , 
+                            p.name          p_name          , 
+                            p.price         p_price         , 
+                            p.quantity      p_quantity      , 
+                            p.description   p_description   , 
+                            p.image         p_image         , 
+                            p.category_id   p_category_id   , 
+                            c.name          c_name   
+                    FROM $this->table p
+                    JOIN categories c 
+                    ON p.category_id = c.id
+                    WHERE p.id = :id
+            ";
+
+            $stmt = $this->conn->prepare($sql);
+
+            $stmt->bindParam(':id', $id);
+
+            $stmt->execute();
+            return $stmt->fetchAll();
+        } catch (\Exception $e) {
+            echo 'ERROR: ' . $e->getMessage();
+            die;
+        }
+    }
+
     public function getCategory()
     {
         try {

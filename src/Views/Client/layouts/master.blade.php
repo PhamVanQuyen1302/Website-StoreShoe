@@ -494,5 +494,7 @@
         id="uctk" name="uctk" /><input type="hidden" id="clienIp" value="113.190.83.234">
 </body>
 <script src="../src/ajax/FilterProduct.js"></script>
-
+<script src="../assets/js/main1.js"></script>
+<script src="../src/ajax/AddToCart.js"></script>
+<script src="../src/ajax/DeleCart1.js"></script>
 </html>

@@ -22,7 +22,7 @@
 
             <p class="price">
                 <strong class="f-left">
-                    <span class="tp_product_price">{{ number_format($item['p_price']) }}</span>
+                    <span class="tp_product_price">{{ number_format($item['p_price']) }} đ</span>
                 </strong>
             </p>
             <p class="discount-percent"></p>

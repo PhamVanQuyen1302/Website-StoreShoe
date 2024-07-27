@@ -40,8 +40,7 @@
                                             href="&#x2F;giay-nike-pc569762.html">{{ $product['category_name'] }}</a>
                                     </li>
                                     <li>
-                                        <a
-                                            href="&#x2F;giay-nike-air-force-1-shadow-se-womens-solar-red-db3902100-p37834087.html">Giày
+                                        <a href="/product/{{ $product['p_id'] }}">Giày
                                             Nike Air Force 1 Shadow SE Women’s “Solar Red” DB3902-100</a>
                                     </li>
                                 </ul>
@@ -76,6 +75,11 @@
                                 </div>
                             </div>
                         </div>
+                        @php
+                            if (isset($_SESSION['user_data_admin']) | isset($_SESSION['user_data_client'])) {
+                               echo "<script> var users = true</script>";
+                            }
+                        @endphp
                         <div class="col-md-7 product-info clearfix">
                             <div class="product-infomation">
                                 <h1 class="tp_product_detail_name">{{ $product['p_name'] }}</h1>
@@ -93,12 +97,14 @@
                                 </div>
                                 <hr class="hidden-sm hidden-xs" />
                             </div>
+                    
                             <div class="product-selection">
                                 <div class="size req clearfix" data-column="i2">
                                     <label>Size</label>
                                     <div class="clearfix">
                                         @foreach ($sizes as $item)
-                                            <a rel="nofollow" data-value="{{ $item['id'] }}" class="">{{ $item['size'] }}</a>
+                                            <a href="#" rel="nofollow" data-value="{{ $item['id'] }}" data-name="{{ $item['size'] }}"
+                                                class="size-link">{{ $item['size'] }}</a>
                                         @endforeach
                                         {{-- <a rel="nofollow" data-value="1528757" href="javascript:void(0)" class="">40</a>
                                     <a rel="nofollow" data-value="1528756" href="javascript:void(0)" class="">39</a> --}}
@@ -108,20 +114,27 @@
                                 </div>
                                 <div class="product-quantity clearfix">
                                     <label>Số lượng</label>
-                                    <span class="number-minus">-</span>
-                                    <input type="number" id="quantity" name="quantity" value="1" min="1"
+                                    <span class="number-down" onclick="totalQuantity()">-</span>
+                                    <input type="number" id="quantity" name="quantity"  value="1" min="1"
                                         max="5000" />
-                                    <span class="number-plus">+</span>
+                                    <span class="number-up" onclick="totalQuantity()">+</span>
                                 </div>
+                                <input type="hidden" name="" id="product-info" data-product-id="{{ $product['p_id'] }}">
                                 <div class="purchase-product">
-                                    <button class="btn-outline btn-addCart add-to-cart unsel btn addtocart-modal"
-                                        selId="37834087" data-psid="37834087" title="Vui lòng chọn kích cỡ!" ck="0">
-                                        <img width="18" class="lazyload" data-sizes="auto"
+                                    <button id="add-to-cart-btn" 
+                                        class="btn-outline btn-addCart add-to-cart unsel btn addtocart-modal"
+                                        selId="37834087" data-psid="37834087" title ck="0"
+                                        disabled>
+                                        <img width="18" class="lazyload" 
                                             data-src="https://web.nvnstatic.net/tp/T0320/img/tmp/img_290616.png?v=3">
-                                        Thêm vào giỏ hàng </button>
-                                    <button class="btn-outline btn-addCart addnow unsel btn addtocart-modal buyNow"
-                                        selId="37834087" data-psid="37834087" title="Vui lòng chọn kích cỡ!" ck="0">
-                                        Mua ngay </button>
+                                        Thêm vào giỏ hàng
+                                    </button>
+                                    <button id="buy-now-btn"
+                                        class="btn-outline btn-addCart addnow unsel btn addtocart-modal buyNow"
+                                        selId="37834087" data-psid="37834087" title ck="0"
+                                        disabled>
+                                        Mua ngay
+                                    </button>
                                     <div class="cart-modal">
                                         <a href="#cartModal" data-toggle="modal">
                                             + Hướng dẫn mua hàng</a>
@@ -369,8 +382,7 @@
                                         <div class="item col-lg-3 col-md-4 col-xs-6 col-sm-6">
                                             <div class="inner-item sold-out">
                                                 <div class="p-image">
-                                                    <a class="a-image"
-                                                        href="/product/{{ $item['p_id'] }}">
+                                                    <a class="a-image" href="/product/{{ $item['p_id'] }}">
                                                         <img data-sizes="auto" src="{{ $item['p_image'] }}"
                                                             data-src="{{ $item['p_image'] }}"
                                                             class="attachment-medium size-medium wp-post-image lazyload"
@@ -391,7 +403,9 @@
 
                                                     <p class="price">
                                                         <strong class="f-left">
-                                                            <span class="tp_product_price">{{ number_format($item['p_price']) }}₫</span> </strong>
+                                                            <span
+                                                                class="tp_product_price">{{ number_format($item['p_price']) }}₫</span>
+                                                        </strong>
                                                     </p>
                                                     <p class="discount-percent"></p>
                                                 </div>
@@ -400,239 +414,6 @@
                                         </div>
                                     </div>
                                 @endforeach
-                                {{-- <div class="box-product box_tab_index prdWrapper" data-pid="37834032">
-                                    <div class="item col-lg-3 col-md-4 col-xs-6 col-sm-6">
-                                        <div class="inner-item sold-out">
-                                            <div class="p-image">
-                                                <a class="a-image"
-                                                    href="/giay-nike-air-force-1-low-shadow-sunset-pulse-w-p37834032.html">
-                                                    <img data-sizes="auto" src="/img/lazyLoading.gif"
-                                                        data-src="https://pos.nvncdn.com/5a10ca-97757/ps/20220316_qGNdIUqyD0HbRAgx4C2d6igo.jpeg"
-                                                        class="attachment-medium size-medium wp-post-image lazyload"
-                                                        alt="Giày Nike Air Force 1 Low Shadow Sunset Pulse (W)" />
-                                                </a>
-                                                <div class="btn-quickview tp_button" data-psId="37834032"><i
-                                                        class="fal fa-eye"></i><span> Xem nhanh</span>
-                                                </div>
-                                            </div>
-                                            <p class="discount-percent icpercent">
-                                                -15<span class="percent">%</span>
-                                            </p>
-                                            <div class="box-text">
-                                                <p class="title"><a class="tp_product_name"
-                                                        href="/giay-nike-air-force-1-low-shadow-sunset-pulse-w-p37834032.html"
-                                                        title="Giày Nike Air Force 1 Low Shadow Sunset Pulse (W)">Giày Nike
-                                                        Air Force 1 Low Shadow Sunset Pulse (W)</a>
-                                                </p>
-
-                                                <p class="price">
-                                                    <strong class="f-left">
-                                                        <span class="tp_product_price">2,990,000 ₫ </span><del
-                                                            class="tp_product_price_old">3,500,000 ₫ </del> </strong>
-                                                </p>
-                                                <p class="discount-percent"></p>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="box-product box_tab_index prdWrapper" data-pid="37833973">
-                                    <div class="item col-lg-3 col-md-4 col-xs-6 col-sm-6">
-                                        <div class="inner-item sold-out">
-                                            <div class="p-image">
-                                                <a class="a-image"
-                                                    href="/giay-nike-air-force-1-07-white-university-red-w-p37833973.html">
-                                                    <img data-sizes="auto" src="/img/lazyLoading.gif"
-                                                        data-src="https://pos.nvncdn.com/5a10ca-97757/ps/20220316_4S7ZYbkXTlrUxkSdYajX2PNw.jpeg"
-                                                        class="attachment-medium size-medium wp-post-image lazyload"
-                                                        alt="Giày Nike Air Force 1 ’07 ‘White University Red’ (W)" />
-                                                </a>
-                                                <div class="btn-quickview tp_button" data-psId="37833973"><i
-                                                        class="fal fa-eye"></i><span> Xem nhanh</span>
-                                                </div>
-                                            </div>
-                                            <div class="box-text">
-                                                <p class="title"><a class="tp_product_name"
-                                                        href="/giay-nike-air-force-1-07-white-university-red-w-p37833973.html"
-                                                        title="Giày Nike Air Force 1 ’07 ‘White University Red’ (W)">Giày
-                                                        Nike Air Force 1 ’07 ‘White University Red’ (W)</a>
-                                                </p>
-
-                                                <p class="price">
-                                                    <strong class="f-left">
-                                                        <span class="tp_product_price">2,999,000 ₫ </span> </strong>
-                                                </p>
-                                                <p class="discount-percent"></p>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="box-product box_tab_index prdWrapper" data-pid="37833872">
-                                    <div class="item col-lg-3 col-md-4 col-xs-6 col-sm-6">
-                                        <div class="inner-item sold-out">
-                                            <div class="p-image">
-                                                <a class="a-image"
-                                                    href="/giay-air-jordan-1-low-gs-court-purple-p37833872.html">
-                                                    <img data-sizes="auto" src="/img/lazyLoading.gif"
-                                                        data-src="https://pos.nvncdn.com/5a10ca-97757/ps/20220316_sIIAzJMREarfDPevcMpJbXGV.jpg"
-                                                        class="attachment-medium size-medium wp-post-image lazyload"
-                                                        alt="Giày Air Jordan 1 Low GS ‘Court Purple’" />
-                                                </a>
-                                                <div class="btn-quickview tp_button" data-psId="37833872"><i
-                                                        class="fal fa-eye"></i><span> Xem nhanh</span>
-                                                </div>
-                                            </div>
-                                            <div class="box-text">
-                                                <p class="title"><a class="tp_product_name"
-                                                        href="/giay-air-jordan-1-low-gs-court-purple-p37833872.html"
-                                                        title="Giày Air Jordan 1 Low GS ‘Court Purple’">Giày Air Jordan 1
-                                                        Low GS ‘Court Purple’</a>
-                                                </p>
-
-                                                <p class="price">
-                                                    <strong class="f-left">
-                                                        <span class="tp_product_price">4,290,000 ₫ </span> </strong>
-                                                </p>
-                                                <p class="discount-percent"></p>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="box-product box_tab_index prdWrapper" data-pid="37825425">
-                                    <div class="item col-lg-3 col-md-4 col-xs-6 col-sm-6">
-                                        <div class="inner-item sold-out">
-                                            <div class="p-image">
-                                                <a class="a-image"
-                                                    href="/giay-nike-air-jordan-1-mid-se-varsity-purple-p37825425.html">
-                                                    <img data-sizes="auto" src="/img/lazyLoading.gif"
-                                                        data-src="https://pos.nvncdn.com/5a10ca-97757/ps/20220315_w7EFPGZ049S1i6yguUbps91Y.jpg"
-                                                        class="attachment-medium size-medium wp-post-image lazyload"
-                                                        alt="Giày Nike Air Jordan 1 Mid SE ‘Varsity Purple’" />
-                                                </a>
-                                                <div class="btn-quickview tp_button" data-psId="37825425"><i
-                                                        class="fal fa-eye"></i><span> Xem nhanh</span>
-                                                </div>
-                                            </div>
-                                            <div class="box-text">
-                                                <p class="title"><a class="tp_product_name"
-                                                        href="/giay-nike-air-jordan-1-mid-se-varsity-purple-p37825425.html"
-                                                        title="Giày Nike Air Jordan 1 Mid SE ‘Varsity Purple’">Giày Nike
-                                                        Air
-                                                        Jordan 1 Mid SE ‘Varsity Purple’</a>
-                                                </p>
-
-                                                <p class="price">
-                                                    <strong class="f-left">
-                                                        <span class="tp_product_price">4,290,000 ₫ </span> </strong>
-                                                </p>
-                                                <p class="discount-percent"></p>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="box-product box_tab_index prdWrapper" data-pid="37825414">
-                                    <div class="item col-lg-3 col-md-4 col-xs-6 col-sm-6">
-                                        <div class="inner-item sold-out">
-                                            <div class="p-image">
-                                                <a class="a-image"
-                                                    href="/giay-nike-air-jordan-1-mid-black-chile-red-white-p37825414.html">
-                                                    <img data-sizes="auto" src="/img/lazyLoading.gif"
-                                                        data-src="https://pos.nvncdn.com/5a10ca-97757/ps/20220315_NtR6tDJlUkLFLWSKUXP4pGII.jpg"
-                                                        class="attachment-medium size-medium wp-post-image lazyload"
-                                                        alt="Giày Nike Air Jordan 1 Mid Black Chile Red White" />
-                                                </a>
-                                                <div class="btn-quickview tp_button" data-psId="37825414"><i
-                                                        class="fal fa-eye"></i><span> Xem nhanh</span>
-                                                </div>
-                                            </div>
-                                            <div class="box-text">
-                                                <p class="title"><a class="tp_product_name"
-                                                        href="/giay-nike-air-jordan-1-mid-black-chile-red-white-p37825414.html"
-                                                        title="Giày Nike Air Jordan 1 Mid Black Chile Red White">Giày Nike
-                                                        Air Jordan 1 Mid Black Chile Red White</a>
-                                                </p>
-
-                                                <p class="price">
-                                                    <strong class="f-left">
-                                                        <span class="tp_product_price">4,450,000 ₫ </span> </strong>
-                                                </p>
-                                                <p class="discount-percent"></p>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="box-product box_tab_index prdWrapper" data-pid="37825401">
-                                    <div class="item col-lg-3 col-md-4 col-xs-6 col-sm-6">
-                                        <div class="inner-item sold-out">
-                                            <div class="p-image">
-                                                <a class="a-image"
-                                                    href="/giay-nike-air-jordan-1-mid-black-racer-blue-white-p37825401.html">
-                                                    <img data-sizes="auto" src="/img/lazyLoading.gif"
-                                                        data-src="https://pos.nvncdn.com/5a10ca-97757/ps/20220315_B5FH7P2sRuiMf25J5DXijTFq.jpeg"
-                                                        class="attachment-medium size-medium wp-post-image lazyload"
-                                                        alt="Giày Nike Air Jordan 1 Mid Black Racer Blue White" />
-                                                </a>
-                                                <div class="btn-quickview tp_button" data-psId="37825401"><i
-                                                        class="fal fa-eye"></i><span> Xem nhanh</span>
-                                                </div>
-                                            </div>
-                                            <p class="discount-percent icpercent">
-                                                -10<span class="percent">%</span>
-                                            </p>
-                                            <div class="box-text">
-                                                <p class="title"><a class="tp_product_name"
-                                                        href="/giay-nike-air-jordan-1-mid-black-racer-blue-white-p37825401.html"
-                                                        title="Giày Nike Air Jordan 1 Mid Black Racer Blue White">Giày Nike
-                                                        Air Jordan 1 Mid Black Racer Blue White</a>
-                                                </p>
-
-                                                <p class="price">
-                                                    <strong class="f-left">
-                                                        <span class="tp_product_price">4,455,000 ₫ </span><del
-                                                            class="tp_product_price_old">4,950,000₫ </del> </strong>
-                                                </p>
-                                                <p class="discount-percent"></p>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="box-product box_tab_index prdWrapper" data-pid="37824157">
-                                    <div class="item col-lg-3 col-md-4 col-xs-6 col-sm-6">
-                                        <div class="inner-item sold-out">
-                                            <div class="p-image">
-                                                <a class="a-image"
-                                                    href="/giay-nike-air-jordan-1-mid-canyon-rust-p37824157.html">
-                                                    <img data-sizes="auto" src="/img/lazyLoading.gif"
-                                                        data-src="https://pos.nvncdn.com/5a10ca-97757/ps/20220315_r3iS0HUUTuvsNwP2cGiCeuxu.jpg"
-                                                        class="attachment-medium size-medium wp-post-image lazyload"
-                                                        alt="Giày Nike Air Jordan 1 Mid Canyon Rust" />
-                                                </a>
-                                                <div class="btn-quickview tp_button" data-psId="37824157"><i
-                                                        class="fal fa-eye"></i><span> Xem nhanh</span>
-                                                </div>
-                                            </div>
-                                            <div class="box-text">
-                                                <p class="title"><a class="tp_product_name"
-                                                        href="/giay-nike-air-jordan-1-mid-canyon-rust-p37824157.html"
-                                                        title="Giày Nike Air Jordan 1 Mid Canyon Rust">Giày Nike Air Jordan
-                                                        1 Mid Canyon Rust</a>
-                                                </p>
-
-                                                <p class="price">
-                                                    <strong class="f-left">
-                                                        <span class="tp_product_price">7,400,000 ₫ </span> </strong>
-                                                </p>
-                                                <p class="discount-percent"></p>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div> --}}
                             </div>
                         </div>
                     </div>
@@ -755,4 +536,5 @@
         </style><input type="hidden" id="bussinessId" value="97757"><input type="hidden" value=""
             id="uctk" name="uctk" /><input type="hidden" id="clienIp" value="113.190.83.234">
     </body>
+    
 @endsection
